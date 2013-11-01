@@ -22,7 +22,7 @@ group :development, :test do
   gem 'spork', '0.9.2'
 
 end
-
+gem 'passenger'
 group :test do
   gem 'capybara', '1.1.2'
   gem 'factory_girl_rails', '4.2.1', :require => false
@@ -56,6 +56,7 @@ gem 'thin'
 
 # Deploy with Capistrano
 # gem 'capistrano'
-
+ gem "capistrano", "~> 2.15.5"
+ gem 'capistrano-ext'
 # To use debugger
 # gem 'debugger'
