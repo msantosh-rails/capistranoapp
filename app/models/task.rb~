@@ -1,0 +1,5 @@
+class Task < ActiveRecord::Base
+  attr_accessible :tname
+  has_many :attachments
+  belongs_to :project
+end

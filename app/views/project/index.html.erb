@@ -1,0 +1,20 @@
+
+ <table cellpadding=5>
+	<tr>
+		<th><%=sortable "id"%></th>
+	<th><%=sortable "pname"%></th>
+
+	</tr>
+	<%@p.each do|s|%>
+ 	<tr>
+ <td>
+  <b><%= s.id %></b>
+  </td>
+  <td>
+  <b><%= s.pname %></b>
+
+ </td>
+</tr>
+<%end%>
+ </table>
+

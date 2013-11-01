@@ -1,0 +1,17 @@
+require 'factory_girl'
+
+FactoryGirl.define do
+factory :Organization do
+  name "ss"
+  org_name "org1"
+end
+
+=begin
+FactoryGirl.define :Organization do |f|
+  f.id 20
+  f.name "ss"
+  f.org_name "org1"
+  f.created_at 10
+  f.updated_at 10
+end
+=end

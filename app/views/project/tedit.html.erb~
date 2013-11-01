@@ -1,0 +1,34 @@
+<h1>Update Task</h1>
+
+<%= form_tag({ :controller => "project", :action => 'taskedit'}) do %>
+
+	<table>
+	<tr>
+		<td> <label >Task1* :</label></td>
+		<td> <input type="text" name=tname placeholder="Task1" value="<%=@taskdetails.tname%>"> </td>
+	</tr>
+
+	
+	<tr>
+		<td><label>Project* : </label></td>
+		<td>
+			<select title="Project" name="pid" >
+			<option >Select Project</option>			
+			<% s=Project.find(:all)%> 
+
+			
+			<% s.each do |f|%>
+			
+				<% if f.id== @taskdetails.project_id %>
+	
+					<option name="orgid" value= <%= f.id %> selected><%= f.pname%></option>				
+				<%else%>			
+			<option name="pid" value= <%= f.id%>  > <%= f.pname%>
+				<%end%>
+			</option><%end%></td>
+	</tr>
+	</table>
+	<%= submit_tag "Update",{:class => 'btn  btn-primary'}  %> <input type="reset"  value="Reset" class="btn btn-inverse" />
+	
+<% end %>
+

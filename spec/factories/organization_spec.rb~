@@ -1,0 +1,21 @@
+require 'spec_helper'
+
+describe Organization do
+  before do
+@org = Organization.new(name: "Santosh", org_name: "Santhosh org")
+end
+
+describe "when Organization Name is already Exist" do
+before do
+org2 = @org.dup
+org2.org_name = @org.org_name.upcase
+org2.save
+end
+it { should be_valid }
+end
+
+it "is valid with proper values" do
+  o = create(:Organization)
+  o.should be_valid
+end
+end

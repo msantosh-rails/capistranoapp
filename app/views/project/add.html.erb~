@@ -1,0 +1,41 @@
+<h1>Create Project</h1>
+
+<%= form_tag({ :controller => "project", :action => 'addproject'}) do %> <!-- Form Begining-->
+
+	<table>
+	<tr>
+		<td> <label >Project Name* :</label></td>
+		<td>  <input type="text" name=pname placeholder="Project Name">   </td>
+	</tr>
+	<tr>
+		<td><label>Organization* : </label></td>
+		<td>
+			<select title="Select Organization" name="orgid" >
+			<option  selected>Select Organization</option>			
+			<% s=Organization.find(:all)%> 
+			<% s.each do |f|%>
+			
+				<option name="orgid" value= <%= f.id %> ><%= f.org_name%></option>
+			<%end%>
+		</td>
+	</tr>
+	<tr>
+		<td><label >Project Type* : </label></td>
+		<td>
+			<select title="Select project type" name="ptid" >
+			<option  selected>Select Project type</option>	
+			<% s=Projecttype.find(:all)%> 
+
+			
+			<% s.each do |f|%>
+			
+			<option name="ptid" value= <%= f.id%> ><%= f.ptype%>
+			</option><%end%></td>
+	</tr>
+
+	</table>
+	<%= submit_tag "Create",{:class => 'btn  btn-primary'}  %> 
+	<input type="reset"  value="Reset" class="btn btn-inverse" />
+	
+<% end %> <!-- From Ending-->
+

@@ -1,0 +1,13 @@
+class Attachment < ActiveRecord::Base
+  belongs_to :task
+  attr_accessible :attach, :attachment_name
+ 
+=begin  
+  def attach_file(file,pid)
+   	
+   	self.attachment_name = file.original_filename
+	self.task_id=pid
+	self.attach = file.read()
+ end
+=end 
+end

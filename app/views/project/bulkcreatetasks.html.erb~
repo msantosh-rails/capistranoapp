@@ -1,0 +1,64 @@
+<head>
+<style>
+.attach
+{
+	margin-left:40px !important;
+}
+.span4
+{
+	margin-bottom:10px;
+}
+</style>
+
+</head>
+
+<h1>Create Tasks</h1>
+
+<%= form_tag({ :controller => "project", :action => 'addtask'}, :multipart => true) do %>
+
+	<table>
+	<tr>
+		<td> <label >Task1* :</label></td>
+		<td> <input type="text" name=tname1 placeholder="Task1"> </td>
+	</tr>
+
+	<tr>
+		<td> <label >Task2 :</label></td>
+		<td> <input type="text" name=tname2 placeholder="Task2"> </td>
+	</tr>
+
+	<tr>
+		<td> <label >Task3 :</label></td>
+		<td> <input type="text" name=tname3 placeholder="Task3"> </td>
+	</tr>
+
+	<tr>
+		<td> <label >Task4 :</label></td>
+		<td> <input type="text" name=tname4 placeholder="Task4"> </td>
+	</tr>
+
+	<tr>
+		<td> <label >Task5 :</label></td>
+		<td> <input type="text" name=tname5 placeholder="Task5"> </td>
+	</tr>
+
+	<tr>
+		<td><label>Project* : </label></td>
+		<td>
+			<select title="Project" name="pid" >
+			<option  selected>Select Project</option>			
+			<% s=Project.find(:all)%> 
+
+			
+			<% s.each do |f|%>
+			
+			<option name="pid" value= <%= f.id%>  > <%= f.pname%>
+			</option><%end%></td>
+	</tr>
+	</table>
+
+
+<%= submit_tag "Create",{:class => 'btn  btn-primary'}  %> &nbsp; <input type="reset"  value="Reset" class="btn btn-inverse" />
+
+<% end %>
+

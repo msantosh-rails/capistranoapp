@@ -1,0 +1,65 @@
+<head>
+<style>
+a.close
+{
+	font-weight:bold;
+}
+
+</style>
+<script>
+
+$(document).ready(function(){
+
+	
+	
+	$(".more").click(function(){
+
+
+		$(".attach").append("<span> <input type='file' name='file[]'> </span>");
+	});
+	
+	
+
+});
+
+</script>
+</head>
+
+<h1>Add Attachments</h1>
+
+<div class=span8 offset=2>
+<!-- Form Begining-->
+<%= form_tag({ :controller => "project", :action => 'attachment'}, :multipart => true) do %> 
+<div class="span5">
+		<div class="span2"><label>Task* : </label></div>
+		
+		<div class="span2">
+			<select title="Project" name="pid" >
+			<option  selected>Select Task</option>			
+			<% t=Project.find(:all)%>		
+			<% s=Task.find(:all)%> 
+	
+				<% t.each do |f1|%>
+				<% s.each do |f|%>
+					<%if f1.id==f.project_id%>
+					<option name="pid" value= <%= f.id%>  > <%= f.tname%> </option>
+					<%end%>
+				<%end%>
+				<%end%>	</select>	</div>
+</div>
+
+<div class="span6">
+		<div class="span2"><label > Select File* :</label> </div>
+		
+		<div class="span3 attach"><%= file_field_tag 'file[]',:multiple =>:true %>
+
+		</div>
+<div class="span4" style="float:right"  > &nbsp; &nbsp;&nbsp;  <a class="more" href="javaScript:void(0)"> Add More Attachments</a></div>		
+</div>
+
+<div class="span5">
+<div class=span3 ><%= submit_tag "Attach", :class => 'btn  btn-primary' %></div>
+</div>
+<% end %> <!-- Form Ending-->
+</div> <!-- Main Div -->
+

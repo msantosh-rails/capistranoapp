@@ -1,0 +1,12 @@
+class Project < ActiveRecord::Base
+  attr_accessible :pname, :ptypeid
+  
+  belongs_to :organization 
+  belongs_to :projectype
+  has_many :tasks,dependent: :destroy
+  
+
+  
+  
+  
+end

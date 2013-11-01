@@ -1,0 +1,85 @@
+<html>
+<head>
+<script>
+$(document).ready(function(){
+	$('.count').click(function(){
+			$(this).parents("div").children("span").toggle();
+	});
+});
+</script>
+<style>
+div
+{
+	padding-bottom:5px;
+}
+.pad
+{
+	padding-left:30px;
+}
+span
+{
+	font-weight:900;
+}
+</style>
+</head>
+
+<body>
+<%= link_to "Create an Organization",new_path , class: "btn btn-large btn-primary link1" %>
+<h1 style="clear:both">List of all Organizations</h1>
+
+<!-- QUERY  FOR COUNTIN NO.OF PROJECTS IN AN ORGANIZATIONS  -->
+
+<%p=Organization.find_by_sql"select o.org_name,p.pname,count(p.pname) count from organizations o left join projects p on o.id=p.organization_id group by o.org_name;"%>
+
+<!-- QUERY  FOR RETRIEVING ORGANIZATIONS AND THEIR PROJECTS -->
+
+<% s=Organization.find_by_sql" select o.org_name,p.pname from organizations o left join projects p on o.id=p.organization_id;"%> 
+
+<!-- QUERY FOR RTRIEVING DISTINCT ORGANIZATION NAMES -->
+ 
+<% r=Organization.find_by_sql" select distinct o.org_name from organizations o left join projects p on o.id=p.organization_id;"%> 
+
+
+
+<div class='span7 offset3'>	<!-- Main Div -->							
+<div class="span6">
+	<div class="span2">Organization Name </div>
+	<div class="span2">No.of Projects </div>
+</div>
+		<% p.each do |f| %>
+	
+			<div class="span7"> 
+						
+				<div class="span2"> <%= f.org_name%> </div> 
+				
+				<div class='span1 pad'> 
+				   <a href="#" class="count" title='Click to View Projects'><%=f.count%></a> 
+				</div>
+				<div class="span1"><%=link_to "Edit",oedit_path(:name=>f.org_name)%> </div>
+
+   			       <div >
+   			       
+ 			       <%= link_to "Delete",odelete_path(:name=>f.org_name) ,:confirm => "Are You sure?"%>
+   			       
+
+   			       </div>
+		
+			<span class='span4' style='display:none' >
+				<% s.each do |f1|%>
+						
+					<% if f.org_name==f1.org_name%>					
+
+					<%=f1.pname %> <br />
+					<%end%>
+						
+					<%end%>
+			 </span>
+				</div>
+			<%end%>
+
+
+</div> <!-- Main Div End -->
+
+
+</body>
+</html>			

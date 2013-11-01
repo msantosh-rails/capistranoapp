@@ -1,0 +1,86 @@
+<html>
+<head>
+ <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+<script>
+
+ $(function() {
+       
+    var t =$("#hide").val();
+    var array = t.split('"');                        
+    
+    var availableTags = [ ];
+    $( "#tags" ).autocomplete({
+      source: array
+    });
+  });
+
+</script>
+<style>
+table
+{
+	margin:auto;
+}
+</style>
+</head>
+<body>
+<h1> <%#=@pname.pname%> Tasks List </h1>
+
+
+
+<div class="btn-toolbar">
+
+<%= link_to "Create Tasks ",ctask_path , class: "btn btn-primary" %>
+
+</div>
+
+<div class="well">
+    <table  class="table table-striped table-hover" id="example">
+      <thead>
+        <tr >	
+		<th> <%= sort_link(@search, :task_tname, "Task Name",:id=>@pid)%></th>
+		<th > <%= sort_link(@search, :attachment_name, "Attachment",:id=>@pid)%> </th>           <th colspan=2><%=link_to "Operations",'#'%></th>
+
+	</tr>
+	</thead>
+      <tbody>
+		      
+	<% @attachment.each do |att|%>
+		<%tid=att.task.try(:project_id)%>
+		<% if tid==@pid && att.task_id==att.task.try(:id)%>
+        <tr>
+          <td><%= att.task.try(:tname)%></td>
+
+		<td>
+		
+<%= link_to att.attachment_name,download_path(:name=>att.attachment_name),:title=>"Click To Download Attachment" %> 
+			
+		</td>		<td><%= link_to "Edit",tedit_path(:name=>att.task.try(:tname)), class: "btn btn-primary"%>  &nbsp;  
+		 <%= link_to "Delete",tdelete_path(:name=>att.task.try(:tname)), class: "btn btn-danger" ,:confirm => "Are You sure?"%></td>
+	</tr>
+	
+			<%end%>
+			<%end%>
+	</tbody>
+</table>
+
+ <%a=Array.new%>
+<%at=Attachment.all%>
+<% at.each do |att|%>
+		<%tid=att.task.try(:project_id)%>
+		<% if tid==@pid %> 
+			<% if !a.include?(att.task.try(:tname)) %>
+          <% a << att.task.try(:tname)%>
+          		<%end%>
+          <% a << att.attachment_name%>
+<%end%>   
+<%end%>       
+ <input type=hidden id="hide" value= "'<%=a.map(&:inspect).join('')%>'"/>    
+</div>
+
+<%= paginate @attachment, :window=>2 %>
+<%#= link_to 'Back', result_path(:name=>@oid),:class=>"btn" %>
+</body>
+</html>			

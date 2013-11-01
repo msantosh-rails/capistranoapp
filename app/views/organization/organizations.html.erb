@@ -1,0 +1,127 @@
+<html>
+<head>
+
+ <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css" />
+
+<script>
+$(function() {
+var availableTags = [
+"ActionScript",
+"AppleScript",
+"Asp",
+"BASIC",
+"C",
+"C++",
+"Clojure",
+"COBOL",
+"ColdFusion",
+"Erlang",
+"Fortran",
+"Groovy",
+"Haskell",
+"Java",
+"JavaScript",
+"Lisp",
+"Perl",
+"PHP",
+"Python",
+"Ruby",
+"Scala",
+"Scheme"
+];
+function split( val ) {
+return val.split( /,\s*/ );
+}
+function extractLast( term ) {
+return split( term ).pop();
+}
+$( "#tagss" )
+// don't navigate away from the field on tab when selecting an item
+.bind( "keydown", function( event ) {
+if ( event.keyCode === $.ui.keyCode.TAB &&
+$( this ).data( "ui-autocomplete" ).menu.active ) {
+event.preventDefault();
+}
+})
+.autocomplete({
+minLength: 0,
+source: function( request, response ) {
+// delegate back to autocomplete, but extract the last term
+response( $.ui.autocomplete.filter(
+availableTags, extractLast( request.term ) ) );
+},
+focus: function() {
+// prevent value inserted on focus
+return false;
+},
+select: function( event, ui ) {
+var terms = split( this.value );
+// remove the current input
+terms.pop();
+// add the selected item
+terms.push( ui.item.value );
+// add placeholder to get the comma-and-space at the end
+terms.push( "" );
+this.value = terms.join( ", " );
+return false;
+}
+});
+});
+</script>
+
+
+</head>
+<body>
+
+<% if flash[:notice]%>
+<div class="alert alert-success msg" id="msgbox" >
+           <a class="close" data-dismiss="alert"  href="#">&times;</a><%= flash[:notice]%> </div>
+
+<%end%>
+
+
+<h1 style="clear:both">List of all Organizations</h1>
+
+
+
+<div class="btn-toolbar">
+
+<%= link_to "Create an Organization ",new_path , class: "btn btn-primary" %>
+
+</div>
+
+<div class="well">
+    <table  class="table table-striped table-hover">
+      <thead>
+        <tr >
+        <th> <%= sort_link(@search, :org_name, "Organization Name") %> </th>
+            <th><%= sort_link(@search,:pcount,"No.of Projects") %></th>
+            <th colspan=2><%=link_to "Operations",'#'%></th>
+         </tr>
+      </thead>
+      <tbody>
+
+	<% @org.each do |o| %>
+      
+        <tr>
+          <td> <%= o.org_name%></td>
+               
+          
+          <td >&nbsp; &nbsp; &nbsp; <%= link_to o.pcount,result_path(:name=>o.id),:title=>"Click to View Projects"%></td>
+          <td>
+	      <%=link_to "Edit",oedit_path(:name=>o.org_name), class: "btn btn-primary"%> &nbsp;
+<%= link_to "Delete",odelete_path(:name=>o.org_name) , class: "btn btn-danger",:confirm => "Are You sure?"%>
+         </td>
+        </tr>
+        <%end%>
+        
+      </tbody>
+    </table>
+        <input type=hidden id="hide" value= "<%=@a%>;"/>
+</div>
+<%= paginate @org, :window => 2  %>
+</body>
+</html>			

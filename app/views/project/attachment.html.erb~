@@ -1,0 +1,7 @@
+
+<% if flash[:notice]%>
+<h2> <%= flash[:notice]%></h2>
+<%else%>
+<h2> <%= flash[:error]%></h2>
+<%end%>
+<%= link_to "Back",:back%>

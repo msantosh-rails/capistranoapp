@@ -1,0 +1,19 @@
+<h1>Create Organization</h1>
+
+<%= form_tag({ :controller => "organization", :action => 'create'}, :name=>'organization') do %>
+
+	<table>
+	<tr>
+		<td><label >Full Name* : </label></td>
+		<td><input type=text name='organization[name]' id=orgname placeholder="Name" /></td>		
+	</tr>
+	<tr>
+
+		<td> <label >Organization Name* :</label></td>
+		<td>  <input type=text name='organization[org_name]' id=name placeholder="Organization Name" />    </td>
+	</tr>
+	</table>
+	<%= submit_tag "Create",{:class => 'btn  btn-primary'}  %> <input type="reset"  value="Reset" class="btn btn-inverse" />
+	
+<% end %>
+

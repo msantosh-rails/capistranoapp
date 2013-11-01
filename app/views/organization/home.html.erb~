@@ -1,0 +1,21 @@
+<head>
+<style>
+	body
+	{
+		margin-top:10px;
+		background-color:white;
+	}
+</style>
+</head>
+
+<div class="center hero-unit">
+  <h1>Project Management System</h1>
+
+  <h2>
+    Welcome to PMS Here you can add projects by creating an Organization
+  </h2>
+
+  <%= link_to "Create an Organization",new_path , class: "btn btn-large btn-primary" %>
+</div>
+
+

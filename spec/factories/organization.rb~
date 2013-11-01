@@ -1,0 +1,5 @@
+
+FactoryGirl.define :org do |f|
+  f.name "ss"
+  f.org_name "org1"
+end

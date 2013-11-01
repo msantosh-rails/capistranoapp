@@ -1,0 +1,52 @@
+<h1>Update Project</h1>
+
+<%= form_tag({ :controller => "project", :action => 'prgedit'}) do %> <!-- Form Begining-->
+
+	<table>
+	<tr>
+		<td> <label >Project Name* :</label></td>
+		<td>  <input type="text" name=pname placeholder="Project Name" value="<%= @prgdetails.pname %>">   </td>
+	</tr>
+	<tr>
+		<td><label>Organization* : </label></td>
+		<td>
+			<select title="Select Organization" name="orgid" >
+			<option>Select Organization</option>			
+			<% s=Organization.find(:all)%> 
+			<% s.each do |f|%>
+			
+				<% if f.id== @prgdetails.organization_id %>
+	
+					<option name="orgid" value= <%= f.id %> selected><%= f.org_name%></option>				
+				<%else%>
+					<option name="orgid" value= <%= f.id %> ><%= f.org_name%></option>
+				<%end%>
+				
+			<%end%>
+		</td>
+	</tr>
+	<tr>
+		<td><label >Project Type* : </label></td>
+		<td>
+			<select title="Select project type" name="ptid" >
+			<option  selected>Select Project type</option>	
+			<% s=Projecttype.find(:all)%> 
+
+			
+			<% s.each do |f|%>
+			<% if f.id== @prgdetails.projecttypes_id %>
+
+				<option name="ptid" value= <%= f.id%> selected><%= f.ptype%>
+			<%else%>
+				<option name="ptid" value= <%= f.ptypeid%> ><%= f.ptype%></option>
+			<%end%>
+			<%end%>
+		</td>
+	</tr>
+
+	</table>
+	<%= submit_tag "Update",{:class => 'btn  btn-primary'}  %> 
+	<%=link_to "Back",:back, :class=>"btn btn-inverse" %>
+	
+<% end %> <!-- From Ending-->
+

@@ -1,0 +1,8 @@
+require 'spec_helper'
+
+describe Attachment do
+
+	attach_file "file", "#{Rails.root}/spec/fixtures/Sample.txt"
+
+
+end

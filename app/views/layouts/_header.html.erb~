@@ -1,0 +1,16 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to "PMS", '#', id: "logo" %>
+      <nav>
+        <ul class="nav pull-right">
+          <li><%= link_to "Home", root_path,:class=>"home" %></li>
+          <li><%= link_to "Organizations", organizations_path,:class=>"org",:title=>"List of all Organizations along with their projects",:datatoggle=>"tooltip" %></li>          
+          <li><%= link_to "Projects", projects_path,:class=>"projects" %></li>
+          <li><%= link_to "Tasks", tasks_path,:class=>"tasks" %></li>
+          <li><%= link_to "Attachments", attachments_path,:class=>"attach" %></li>          
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>

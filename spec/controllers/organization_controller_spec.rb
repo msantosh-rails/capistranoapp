@@ -1,0 +1,36 @@
+require 'spec_helper'
+
+describe OrganizationController do
+
+describe "GET 'home'" do
+    it "returns http success" do
+      get 'home'
+      response.should be_success
+    end
+  end
+
+ 
+describe "GET 'new'" do
+    it "returns http success" do
+      get 'new'
+      response.should be_success
+    end
+  end
+
+describe "routing" do
+	
+	
+	it " Routes to Organization Create page" do
+	
+		expect(:get => "/new").to route_to(:controller => "organization", :action => "new")
+	
+	end
+
+	it " Routes to Home page" do
+	
+		expect(:get => "/home").to route_to(:controller => "organization", :action => "home")
+	
+	end	
+		
+end
+end

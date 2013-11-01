@@ -1,0 +1,18 @@
+<h1>Update Organization</h1>
+
+<%= form_tag({ :controller => "organization", :action => 'orgedit'}) do %>
+
+	<table>
+	<tr>
+		<td> <label>Full Name* :</label></td>
+		<td>  <input type=text name=name id=name placeholder="Name" value= "<%= @orgdetails.name %>" />    </td>
+	</tr>
+	<tr>
+		<td><label >Organization Name* : </label></td>
+		<td><input type=text name=orgname id=orgname placeholder="Organization Name" value= "<%= @orgdetails.org_name%>" /></td>
+	</tr>
+	</table>
+	<%= submit_tag "Update",{:class => 'btn  btn-primary'}  %>  <%=link_to "Back",:back>
+	
+<% end %>
+

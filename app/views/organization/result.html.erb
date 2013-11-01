@@ -1,0 +1,60 @@
+<html>
+
+<body>
+
+
+<h1> Projects List </h1>
+
+
+<div class="btn-toolbar">
+<%= link_to "Create a Project",add_path , class: "btn btn-primary" %>
+
+</div>
+
+<div class="well">
+<table class="table table-striped table-hover" >
+	
+	<thead>
+	<tr>
+          <th><%= sort_link(@search,:pname,"Project Name",:id=>@v)%></th>
+          <th><%= sort_link(@search,:projecttypes_id,"Project Type",:id=>@v)%></th>
+          <th><%= sort_link(@search,:tcount,"No.Of Tasks",:id=>@v)%></th>
+          <th colspan=2><%=link_to "Operations",'#'%></th>
+
+	</tr>
+	</thead>
+	<tbody>
+
+
+		
+			<% @project.each do |ps|%>
+		      		 <%if ps.organization_id==@v%>	
+      			<%@projecttypes.each do |pt|%>
+		       <%if(ps.projecttypes_id == pt.id && ps.organization_id==@v)%>
+		<tr>			
+			<td><%=ps.pname%></td>
+			<td><%=pt.ptype%></td>
+			<td class="pad">&nbsp; &nbsp; &nbsp; 
+
+				<%= link_to ps.tcount,tresult_path(:name=>ps.id),:title=>"Click to View Tasks"%> </div> 
+					
+			
+			</td>
+			<td><%= link_to "Edit",edit_path(:name=>ps.pname), class: "btn btn-primary"%> &nbsp;
+			<%= link_to "Delete",delete_path(:name=>ps.pname) , class: "btn btn-danger",:confirm => "Are You sure?"%></td>
+			
+			
+	</tr>
+			<%end%>
+			<%end%>
+			<%end%>
+			<%end%>	
+				
+	</tbody>
+</table>
+
+</div>
+<%= paginate @project,:window=>2%>
+<%= link_to "Back",organizations_path,:class=>"btn"%>
+</body>
+</html>			

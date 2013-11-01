@@ -1,0 +1,16 @@
+# Place all the behaviors and hooks related to the matching controller here.
+# All this logic will automatically be available in application.js.
+# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+# Override Rails handling of confirmation
+
+$.rails.allowAction = (link) ->
+  $("a[data-confirm]").click (ev) ->
+  href = $(this).attr("href")
+  $("body").append "<div id=\"dataConfirmModal\" class=\"modal\" role=\"dialog\" aria-labelledby=\"dataConfirmLabel\" aria-hidden=\"true\"><div class=\"modal-header\"><button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button><h3 id=\"dataConfirmLabel\">Please Confirm</h3></div><div class=\"modal-body\"></div><div class=\"modal-footer\"><button class=\"btn\" data-dismiss=\"modal\" aria-hidden=\"true\">NO</button><a class=\"btn btn-primary\" id=\"dataConfirmOK\">YES</a></div></div>"  unless $("#dataConfirmModal").length
+  $("#dataConfirmModal").find(".modal-body").text $(this).attr("data-confirm")
+  $("#dataConfirmOK").attr "href", href
+  $("#dataConfirmModal").modal show: true
+  false
+
+  $(html).modal()
+  $('#confirmationDialog .confirm').on 'click', -> $.rails.confirmed(link)

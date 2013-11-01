@@ -1,0 +1,70 @@
+<head>
+<style>
+.attach
+{
+	margin-left:40px !important;
+}
+.span4
+{
+	margin-bottom:10px;
+}
+.buttons
+{
+		margin-left:20px !important;
+}
+
+</style>
+<script>
+
+$(document).ready(function(){
+
+	
+	
+	$(".more").click(function(){
+
+
+		$(".attach").append("<span> <input type='file' name='file[]'> </span>");
+	});
+	
+	
+
+});
+
+</script>
+</head>
+<p>
+<h1 style="display:inline;margin:0px 240px 10px 350px !important " >Create Tasks</h1>
+<%= link_to "Bulk Creation ",bulkcreatetasks_path , class: "btn btn-primary link1" %>
+</p>
+<%= form_tag({ :controller => "project", :action => 'addtask'}, :multipart => true) do %>
+
+	<table>
+	<tr>
+		<td> <label >Task * : </label></td>
+		<td> <input type="text" name=tname placeholder="Task Name"> </td>
+	</tr>
+
+	<tr>
+		<td><label>Project* : </label></td>
+		<td>
+			<select title="Project" name="pid" >
+			<option  selected>Select Project</option>			
+			<% s=Project.find(:all)%> 
+
+			
+			<% s.each do |f|%>
+			
+			<option name="pid" value= <%= f.id%>  > <%= f.pname%>
+			</option><%end%></td>
+	</tr>
+	</table>
+<div class="span6">
+<div class="span3 attach"><%= file_field_tag 'file[]',:multiple =>:true %></div>
+<div class="span4"   > &nbsp; &nbsp;&nbsp;  <a class="more" href="javaScript:void(0)"> Add More Attachments</a></div>
+</div>	
+</div>
+<div class="buttons">
+	<div class="span1" offset=2><%= submit_tag "Create",{:class => 'btn  btn-primary'}  %> </div><div class="span1"><input type="reset"  value="Reset" class="btn btn-inverse" /></div>
+</div>	
+<% end %>
+
